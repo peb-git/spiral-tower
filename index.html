@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d5e9e1">
+<title>나선 타워</title>
+  <script type="module" crossorigin src="./assets/index-DcgZgI_K.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-C9Kgl2Ge.css">
+</head>
+<body>
+<main id="app">
+  <canvas id="game" tabindex="-1" aria-label="화면을 좌우로 드래그해서 나선 타워를 돌립니다. 오른쪽은 전진, 왼쪽은 후퇴입니다. 손을 멈추면 이동도 멈춥니다."></canvas>
+
+  <div class="hud" id="hud">
+    <div class="vitals">
+      <div class="health" id="health">
+        <div class="health-label"><span>체력</span><b id="healthValue">100 / 100</b></div>
+        <div class="health-track" id="healthTrack" role="progressbar" aria-label="체력" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="health-fill" id="healthFill"></div></div>
+      </div>
+      <div class="journey">
+        <div class="journey-label"><span id="floorLabel">1/3층</span><b id="timer">0:00</b></div>
+        <div class="progress-line">
+          <div class="track" id="progressTrack" role="progressbar" aria-label="정상까지의 등반 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="meter"></span></div>
+          <span class="goal-mark" aria-hidden="true">⚑</span>
+        </div>
+      </div>
+    </div>
+    <button class="tool" id="pause" aria-label="일시정지 메뉴" title="일시정지 메뉴">Ⅱ</button>
+    <div class="first-gesture" id="firstGesture" hidden><span>← 뒤로</span><span class="drag-hint">좌우로 드래그</span><span>앞으로 →</span></div>
+  </div>
+
+  <div id="toast" role="status"></div>
+
+  <section class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <div class="card">
+      <div class="eyebrow" id="overlayEyebrow"></div>
+      <h1 id="overlayTitle"></h1>
+      <p id="overlayText"></p>
+      <div class="run-result" id="overlayStats" hidden></div>
+      <button class="primary" id="overlayPrimary"></button>
+      <div class="secondary-options" id="overlaySecondary" hidden></div>
+      <p class="tip" id="overlayTip" hidden></p>
+    </div>
+  </section>
+
+  <section class="upgrades" id="cards" hidden role="dialog" aria-modal="true" aria-labelledby="cardsTitle">
+    <div class="upgrade-content">
+      <div class="eyebrow">강화 선택</div>
+      <h1 id="cardsTitle">어떻게 강해질까요?</h1>
+      <p id="cardsLead">하나를 고르면 이 자리에서 계속 올라가요.</p>
+      <div class="upgrade-list" id="cardList"></div>
+      <div class="upgrade-detail" id="cardDetail" aria-live="polite"></div>
+      <button class="primary" id="cardConfirm" disabled>강화 하나를 골라주세요</button>
+      <div class="build-summary" id="buildSummary"></div>
+    </div>
+  </section>
+
+  <section class="encounter" id="npc" hidden role="dialog" aria-modal="true" aria-labelledby="npcTitle">
+    <div class="npc-content">
+      <div class="npc-portrait" id="npcPortrait" aria-hidden="true"></div>
+      <div class="eyebrow">층 중간의 만남</div>
+      <h1 id="npcTitle"></h1>
+      <p id="npcLine"></p>
+      <div class="npc-choices" id="npcChoices"></div>
+      <p class="npc-hp" id="npcHp"></p>
+    </div>
+  </section>
+
+  <section class="sheet" id="gacha" hidden role="dialog" aria-modal="true" aria-labelledby="gachaTitle">
+    <div class="sheet-content">
+      <button class="close" id="gachaClose" aria-label="닫기">✕</button>
+      <div class="eyebrow">보석 뽑기</div>
+      <h1 id="gachaTitle">새 오브젝트 뽑기</h1>
+      <p>보석으로 새로운 오브젝트를 뽑을 수 있어요.</p>
+      <div class="gems" id="gachaGems">💎 0</div>
+      <div class="capsule-stage">
+        <div class="capsule" id="capsule" aria-hidden="true"><span class="cap-top"></span><span class="cap-bottom"></span><span class="cap-mark">?</span></div>
+        <div class="reveal" id="reveal" hidden></div>
+      </div>
+      <p class="coach" id="gachaCoach"></p>
+      <button class="primary" id="gachaPull">1회 뽑기</button>
+      <button class="primary" id="gachaNext" hidden>장착하러 가기 →</button>
+    </div>
+  </section>
+
+  <section class="sheet" id="equip" hidden role="dialog" aria-modal="true" aria-labelledby="equipTitle">
+    <div class="sheet-content">
+      <div class="eyebrow">장비</div>
+      <h1 id="equipTitle">오브젝트 장착</h1>
+      <p>서로 다른 오브젝트를 최대 3개까지 장착할 수 있어요.</p>
+      <div class="slots" id="equipSlots"></div>
+      <p class="coach" id="equipCoach"></p>
+      <div class="owned" id="equipOwned"></div>
+      <button class="primary" id="equipStart">도전 →</button>
+    </div>
+  </section>
+</main>
+</body>
+</html>
